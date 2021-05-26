@@ -1,0 +1,7 @@
+for test cases tc_a,tc_b,tc_c,tc_d,tc_e use vocabulary.txt
+
+for test case tc_public use vocab_new.txt
+
+
+
+Use command "javac Anagram.java" followed by "Anagram <vocabulary File> <input File>"
