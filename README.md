@@ -61,27 +61,65 @@ In example(bb), 'bb' is not is vocabulary also 'b' is not in vocabulary so no 'a
 
 ### Approach (Source code- Anagram.java)
 
-    ### Step-1:
+    Step-1:
 
-    We know that our input will contain only 37 different(that is 26 [a-z], 10[0-9], 1[']) characters, so we counted all the character in a word given in vocaulary file (used them to find if both word a and b are anagrams or not). 
-    So, we created a custom datatype called as 'node', which essentially counts all the characters in an array(following 0 based indexing) and stores the word also. We counted apostrope at 1st index then digits from 
-    2nd index till 11th index and then from 12th index we stored alphabets till 37th index. Also made some comparators to check if word is correct (abides to our conditions or not).
+    We know that our input will contain only 37 different(that is 26 [a-z], 10[0-9], 1[']) characters, 
+    so we counted all the character in a word given in vocaulary file (used them to find if both word a and b are anagrams or not). 
+    So, we created a custom datatype called as 'node', which essentially counts all the characters of the word(in vocabulary) 
+    in an array (following 0 based indexing) and stores the word also. 
+    
+    We counted apostrope at 1st index then digits from the 2nd index till 11th index and 
+    then from 12th index we stored alphabets till 37th index. 
+    
+    Also made some comparators to check if word is correct (abides to our conditions or not).
 
     For example,
 
-    'node' for 'abc' will look like this
+    'node' class for 'abc' will look like this
 
     Increment index 12th index by 1 (beacuse of 'a' in 'abc'), increment index 13th by 1 then index 14th by 1. 
 
-    Blueprint array  --> [0,0,0,0,0,......,1,1,1......,0,0,0]
+    Blueprint array  --> [0,0,0,0,0,......,1,1,1......,0,0,0] (length 38)
 
-    Then, for each word in vocabulary file we calculated blueprint array then hashed them in an ArrayList of List of List where the primary indexing was done by length of word from 0 to 11th index.
+    Then, for each word in vocabulary file we calculated blueprint array then hashed them in an ArrayList of 
+    List of List where the primary indexing was done by length of word from 0 to 11th index.
 
     Now, we have processed our vocabulary file and have stored it in a hashtable for quick check of anagrams.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    ### Step-2:
+    Step-2:
 
-    We have to read each input and figure out all the 'anagrams' possible
+    We have to read each input and figure out all the 'anagrams' possible.
+    So, we divide 'anagrams' into 0 spaced, 1 spaced and 2 spaced. 
+    
+    For 0 spaced 'anagrams', What we did is we checked whether we have hashed an anagram of given word in the hashtable or not.
+    
+    For 1 spaced 'anagrams',  What we did is made all possible combination of first word (by taking lengths of first word) 
+    and if we found a first word is in vocabulary then we recursively found a 0 spaced 'anagram' of remaining word, 
+    if we got -1 then we know that we cannot make an anagram out of it.
+    
+    For 2 spaced 'anagrams', What we did is made all possible combination of first word (length wise) and recursively called 
+    for all 1 spaced 'anagrams'.
+     
+     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+The main heavy duty work got simpliied because of we found an easy efficient way of storing the words from vocabulary. As, any brute force algorithm will take at most factorial order to complete for each input word. But our designed algorithm can do this in linear time for each word. 
+
+### Main synopsis of storing-
+
+We took each word then counted every character's count and storred them in a hashtable divided in 12 sections (each word goes in according to their length). Then in each section we hashed the words using a primary hashing technique with seperate hashing.(Dividing hashtable into 12 sections reduced number of collisions from a factor of 3 (eg earlier collisions were 1200 then new collisions were 300)). So at worse, each subpart will have 300 (small) number of words, hence making our search for anagrams very efficient.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Primary Hashing Technique-
+   
+    loop 38 times on each word
+        hashvalue += i*blueprint array[i]
+        
+    This hash value gives the index of where to store this word in hashtable.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### A deep discussion on problem and time complexity has been given in 'A4.pdf'.
