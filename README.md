@@ -105,7 +105,7 @@ In example(bb), 'bb' is not is vocabulary also 'b' is not in vocabulary so no 'a
      
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The main heavy duty work got simpliied because of we found an easy efficient way of storing the words from vocabulary. As, any brute force algorithm will take at most factorial order to complete for each input word. But our designed algorithm can do this in linear time for each word. 
+The main heavy duty work got simpliied because of we found an easy efficient way of storing the words from vocabulary. As, any brute force algorithm will take at most factorial order to complete for each input word. But our designed algorithm can do this in linear time for each word. Space complexity is linear wrt to vocabulary size in both the cases.
 
 ### Main synopsis of storing-
 
