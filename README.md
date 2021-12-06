@@ -93,14 +93,17 @@ In example(bb), 'bb' is not is vocabulary also 'b' is not in vocabulary so no 'a
     We have to read each input and figure out all the 'anagrams' possible.
     So, we divide 'anagrams' into 0 spaced, 1 spaced and 2 spaced. 
     
-    For 0 spaced 'anagrams', What we did is we checked whether we have hashed an anagram of given word in the hashtable or not.
+    For 0 spaced 'anagrams', What we did is we checked whether we have hashed an anagram of given word in the hashtable or not. eg. word-'abc' then we go to hashtable's section
+    of length = 3 and check for every word of length = 3, and compare the blueprint of one word with 'abc'. If we found same then we have got a 0 spaced anagram of it.  
     
-    For 1 spaced 'anagrams',  What we did is made all possible combination of first word (by taking lengths of first word) 
-    and if we found a first word is in vocabulary then we recursively found a 0 spaced 'anagram' of remaining word, 
-    if we got -1 then we know that we cannot make an anagram out of it.
+    For 1 spaced 'anagrams',  'Anagram' will be of form of "A B" then what we do is we assume all lengths of A from 1 to ceil(totallength/2), then we go to hashtable's section     of length = len(A). And check if our input word contains any word of hashtable, if yes then we check if we have an 'anagram' of remaining character of input word(to make B)
+    . If yes then we have found an 'anagram' "A B" of input word also we have found an 'anagram' "B A" also if A!=B. Now we can store both "A B" and "B A".
     
-    For 2 spaced 'anagrams', What we did is made all possible combination of first word (length wise) and recursively called 
-    for all 1 spaced 'anagrams'.
+    For 2 spaced 'anagrams', For this we also took similar approach as previous section, that is, 'anagram' will look like "A B C" and now we assume all valid lengths(such that
+    B and C are not empty) of input word then we searched whether there is an 'anagram' inputword(some length) in hashtable if yes, then we searched for whether there is an '
+    anagram' of remaining word in hashtable (B found successfully) if yes then is there an anagram of remainig words of input word in hashtable, if yes then we have found C.
+    Now, we can form all the permutations of "A B C" to get all possible 'anagram' of input word.
+    
      
      
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
